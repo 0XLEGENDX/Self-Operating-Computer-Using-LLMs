@@ -41,42 +41,6 @@ if sys.platform.startswith("win"):
 
     def scroll(amount):
         ctypes.windll.user32.mouse_event(MOUSEEVENTF_WHEEL, 0, 0, amount, 0)
-elif sys.platform.startswith("linux") or sys.platform.startswith("darwin"):
-    from Xlib import display, X
-    from Xlib.ext import xtest
-
-    d = display.Display()
-    s = d.screen()
-    root = s.root
-
-    def move_mouse(x, y):
-        root.warp_pointer(x, y)
-        d.sync()
-
-    def left_click(x, y):
-        move_mouse(x, y)
-        xtest.fake_input(d, X.ButtonPress, 1)
-        xtest.fake_input(d, X.ButtonRelease, 1)
-        d.sync()
-
-    def right_click(x, y):
-        move_mouse(x, y)
-        xtest.fake_input(d, X.ButtonPress, 3)
-        xtest.fake_input(d, X.ButtonRelease, 3)
-        d.sync()
-
-    def double_click(x, y):
-        left_click(x, y)
-        time.sleep(0.1)
-        left_click(x, y)
-
-    def scroll(amount):
-        button = 4 if amount > 0 else 5
-        for _ in range(abs(amount)):
-            xtest.fake_input(d, X.ButtonPress, button)
-            xtest.fake_input(d, X.ButtonRelease, button)
-        d.sync()
-
 else:
     raise SystemError("Unsupported OS")
 
