@@ -34,6 +34,13 @@ def press_key(key):
     key_down(key)
     key_up(key)
 
+def press_key_combination(keys_list:list):
+    """Press and release a key"""
+    for key in keys_list:
+        key_down(key)
+    for key in keys_list:
+        key_up(key)
+
 def type_string(string):
     """Type out a full string, one key at a time"""
     for char in string:
@@ -46,9 +53,5 @@ def type_string(string):
 
 if __name__ == "__main__":
     time.sleep(2)
-
-    print("Typing 'Hello World!'")
-    type_string("Hello World!")
-
-    print("Pressing Enter")
-    press_key("ENTER")
+    key_combination = ["CTRL" , "SHIFT" , "ESC"]
+    press_key_combination(key_combination)
