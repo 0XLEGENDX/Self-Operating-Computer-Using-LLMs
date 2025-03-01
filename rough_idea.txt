@@ -1,0 +1,33 @@
+**Project Proposal: Self-Operating Computer Using Large Language Models (LLMs)**
+
+### **Objective**
+The goal of this project is to develop a fully autonomous computing system powered by advanced Large Language Models (LLMs). Unlike existing AI agents that specialize in controlling browsers or specific tools with hardcoded instructions, this system will dynamically interact with the operating environment, enabling true automation without explicit programming for each new task.
+
+### **Example Features**
+1. **Autonomous Web Interaction**  
+   - Open and navigate web browsers.
+   - Search for information and extract relevant data.
+   - Perform complex web-based operations dynamically.
+
+2. **Software Installation & Execution**  
+   - Install software packages (e.g., JDK for Java development).
+   - Set up development environments.
+   - Compile, execute, and debug Java projects automatically.
+
+3. **Dynamic Problem Solving**  
+   - Detect and resolve software-related issues autonomously.
+   - Provide detailed debugging insights and suggest fixes.
+   - Adapt to new environments without explicit reprogramming.
+
+### **Technical Approach**
+- **Vision-Enabled LLMs**: Incorporating Vision LLMs to interpret screen content, enabling real-time interaction with graphical user interfaces.
+- **Multi-Modal AI Integration**: Combining natural language processing with computer vision and automation frameworks.
+- **Reinforcement Learning**: Implementing a feedback loop to improve decision-making based on past interactions.
+
+### **Challenges & Future Scope**
+- Ensuring system stability and security while granting extensive system permissions.
+- Optimizing real-time performance for seamless user experience.
+- Expanding the system’s adaptability to various operating systems and applications.
+
+This project is open to contributions, and collaboration is encouraged to overcome challenges and push the boundaries of autonomous computing.
+
