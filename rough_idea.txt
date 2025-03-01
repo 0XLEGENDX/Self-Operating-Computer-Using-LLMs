@@ -1,3 +1,6 @@
+28-02-2025
+
+
 **Project Proposal: Self-Operating Computer Using Large Language Models (LLMs)**
 
 ### **Objective**
@@ -30,4 +33,26 @@ The goal of this project is to develop a fully autonomous computing system power
 - Expanding the system’s adaptability to various operating systems and applications.
 
 This project is open to contributions, and collaboration is encouraged to overcome challenges and push the boundaries of autonomous computing.
+
+
+
+
+
+
+01-03-2025
+
+
+
+LLMs cannot give us pinpoint location to click for mouse or typing data.
+This leads to one challenge of identifying buttons and other normal components in the window.
+For ex there are multiple components in an application like buttons, images, icons, clickable icons, text, etc.
+Challenge is to identify each component with accuracy and map them so vision llm can tell where to click or submit data.
+
+
+
+To solve this we'll use ocr and image detector based approach where we'll read all the text using ocr and find all the icons through
+some object detection algorithm. This will help us find all the buttons and text. After doing this we will simply label icons with some numbers
+to the buttons and tell the vision model to return the button number or text which we have to click. This appraoch is not tested but is possible.
+In case of multiple same text buttons, we'll again prompt by labelling these buttons.
+
 
