@@ -1,6 +1,7 @@
 from google import genai
 import dotenv
 import os
+from stt import recognize_speech 
 dotenv.load_dotenv()
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
@@ -126,7 +127,11 @@ def validate_action_step(action_step, image):
 
 
 
+query = recognize_speech()
 
-generate_steps("Open chrome and search for alan turing and save his image.")
-
-
+if query: 
+    image_path = "C:/Users/tapas/Self-Operating-Computer-Using-LLMs/screenshots/Screenshot (32).png"
+    steps = generate_steps(query, image_path)
+    print("Generated Steps:", steps)
+else:
+    print("No valid input detected.")
