@@ -4,7 +4,7 @@ import os
 from stt import recognize_speech 
 dotenv.load_dotenv()
 
-client = genai.Client(api_key="AIzaSyBbscjvZixMhAFIiF5IL3HWnKT-ZBE0-2s" )
+client = genai.Client(api_key=  )
 model_name = "gemini-1.5-pro"
 
 
