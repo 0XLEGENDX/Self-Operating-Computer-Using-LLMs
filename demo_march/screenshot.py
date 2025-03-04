@@ -1,11 +1,15 @@
-import keyboard
+
 from PIL import ImageGrab 
-from datetime import datetime
+
+screenshot_save = ""
 
 def take_screenshot():
     screenshot = ImageGrab.grab()
-    screenshot.save("screenshot1.png")
-    screenshot.close()
- 
-keyboard.add_hotkey("ctrl+shift+a", take_screenshot)
-keyboard.wait("esc")
+    screenshot.save("temp.png")
+    global screenshot_save
+    screenshot_save = screenshot
+    return screenshot
+
+def fetch_screenshot():
+    return screenshot_save
+

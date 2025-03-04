@@ -7,6 +7,16 @@ client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 model_name = "gemini-1.5-pro"
 
 
+def clean_response(response_text):
+
+    result = response_text
+    result = result.replace("```json","")
+    result = result.replace("```","")
+
+    return result
+
+
+
 def generate_steps(user_prompt, image):
 
     base_prompt = """
@@ -18,6 +28,7 @@ def generate_steps(user_prompt, image):
     This is the format you'll be returning the steps in the given format below.
     You'll return a list of actions like this where action object is given.
     Output must be strictly in json string format.
+    Use this json schema
 
     [action,action]
 
@@ -27,8 +38,7 @@ def generate_steps(user_prompt, image):
         actionType : move, left_click, right_click, doubleclick, scroll, type, press_key, press_key_combination
         key : ["CTRL" , "DELETE"]
         string_to_write : "string"
-        location : (x,y) coordinates where to click or type.  Always return (-1 -1) because this feature is not available
-        
+        location : [x,y] coordinates where to click or type.  Always return (-1 -1) because this feature is not available   
     }
 
 
@@ -46,14 +56,14 @@ def generate_steps(user_prompt, image):
     The sample output for this given task should be
     Assuming user is on desktop screen with no tasks going on and chrome is not available on desktop screen.
     Don't input any special characters or extra information unless needed. Keep it simple.
+    
 
     [{
     "intent" : "Click windows button to open the start menu",
     "inputType" : "keyboard",
     "actionType" : "press_key",
     "key" : ["WIN"],
-    "string_to_write" : "",
-    "location" : (-1,-1)
+    "location" : [-1,-1]
     },
 
     {
@@ -62,7 +72,7 @@ def generate_steps(user_prompt, image):
     "actionType" : "type",
     "key" : [],
     "string_to_write" : "chrome",
-    "location" : (-1,-1)
+    "location" : [-1,-1]
     },
 
     {
@@ -70,8 +80,7 @@ def generate_steps(user_prompt, image):
     "inputType" : "keyboard",
     "actionType" : "press_key",
     "key" : ["ENTER"],
-    "string_to_write" : "",
-    "location" : (-1,-1)
+    "location" : [-1,-1]
     },
 
     ......
@@ -92,12 +101,15 @@ def generate_steps(user_prompt, image):
     contents=[base_prompt, image],
     )
 
-    return response.text
+    f = open("temp.txt","w")
+    f.write(response.text)
+    f.close()
+    return clean_response(response.text)
 
 
 def validate_action_step(action_step, image):
 
-    intent = action_step["intent"]
+    intent = action_step
 
     base_prompt = f"""
     You're a computer assistant that helps user to verify if certain task is successfully completed on the computer.
@@ -105,7 +117,7 @@ def validate_action_step(action_step, image):
     Return format should be in the given format and strictly in json string format.
     
     """ + """
-    {"status" : Only return true or false values,
+    {"status" : Only return true or false,
      "reason" : Reason or challenge if not completed}
     """
 
@@ -113,8 +125,8 @@ def validate_action_step(action_step, image):
     model=model_name,
     contents=[base_prompt, image],
     )
-
-    return response.text
+    
+    return clean_response(response.text)
 
 
 
@@ -126,7 +138,7 @@ def validate_action_step(action_step, image):
 
 
 
-
-generate_steps("Open chrome and search for alan turing and save his image.")
+if(__name__=="__main__"):
+    generate_steps("Open chrome and search for alan turing and save his image.")
 
 

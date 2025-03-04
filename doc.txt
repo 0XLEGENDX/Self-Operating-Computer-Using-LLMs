@@ -1,0 +1,26 @@
+[
+    {
+        "intent": "Click windows button to open the start menu",
+        "inputType": "keyboard",
+        "actionType": "press_key",
+        "key": ["WIN"],
+        "string_to_write": "",
+        "location": (-1, -1)
+    },
+    {
+        "intent": "Type word in the search bar",
+        "inputType": "keyboard",
+        "actionType": "type",
+        "key": [],
+        "string_to_write": "word",
+        "location": (-1, -1)
+    },
+    {
+        "intent": "Press enter to open word",
+        "inputType": "keyboard",
+        "actionType": "press_key",
+        "key": ["ENTER"],
+        "string_to_write": "",
+        "location": (-1, -1)
+    }
+]
