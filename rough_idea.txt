@@ -56,3 +56,8 @@ to the buttons and tell the vision model to return the button number or text whi
 In case of multiple same text buttons, we'll again prompt by labelling these buttons.
 
 
+
+
+
+Remember to remove google-genai
+

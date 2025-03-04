@@ -1,0 +1,132 @@
+from google import genai
+import dotenv
+import os
+dotenv.load_dotenv()
+
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+model_name = "gemini-1.5-pro"
+
+
+def generate_steps(user_prompt, image):
+
+    base_prompt = """
+    You're a computer assistant that helps user to operate pc on the users behalf.
+    Your task is to generate steps to achieve the goal given by the user.
+    
+    You can only perform two types of action which are mouse and keyboard.
+    
+    This is the format you'll be returning the steps in the given format below.
+    You'll return a list of actions like this where action object is given.
+    Output must be strictly in json string format.
+
+    [action,action]
+
+    action = {
+        intent: "Explain the task."
+        inputType : mouse,keyboard
+        actionType : move, left_click, right_click, doubleclick, scroll, type, press_key, press_key_combination
+        key : ["CTRL" , "DELETE"]
+        string_to_write : "string"
+        location : (x,y) coordinates where to click or type.  Always return (-1 -1) because this feature is not available
+        
+    }
+
+
+    You'll have to breakdown the process into very small steps like move mouse, left click,etc.
+    For example
+
+    user query is : Open chrome and search for tom cruise and return his info.
+
+    With this query you'll get a starting point which will be a screenshot of the current session in the desktop.
+
+    Your task will be to see what's going on and what steps should you take next to execute this task succesfully without 
+    interfaring with other ongoing tasks.
+
+
+    The sample output for this given task should be
+    Assuming user is on desktop screen with no tasks going on and chrome is not available on desktop screen.
+    Don't input any special characters or extra information unless needed. Keep it simple.
+
+    [{
+    "intent" : "Click windows button to open the start menu",
+    "inputType" : "keyboard",
+    "actionType" : "press_key",
+    "key" : ["WIN"],
+    "string_to_write" : "",
+    "location" : (-1,-1)
+    },
+
+    {
+    "intent" : "Type chrome in the search bar",
+    "inputType" : "keyboard",
+    "actionType" : "type",
+    "key" : [],
+    "string_to_write" : "chrome",
+    "location" : (-1,-1)
+    },
+
+    {
+    "intent" : "Press enter to open chrome",
+    "inputType" : "keyboard",
+    "actionType" : "press_key",
+    "key" : ["ENTER"],
+    "string_to_write" : "",
+    "location" : (-1,-1)
+    },
+
+    ......
+    
+    ]
+
+    This is half example for the given task.
+
+
+    user query for the task you've to return steps is : 
+    """ + user_prompt +""" 
+    
+    Return the steps strictly in given format and pattern."""
+
+
+    response = client.models.generate_content(
+    model=model_name,
+    contents=[base_prompt, image],
+    )
+
+    return response.text
+
+
+def validate_action_step(action_step, image):
+
+    intent = action_step["intent"]
+
+    base_prompt = f"""
+    You're a computer assistant that helps user to verify if certain task is successfully completed on the computer.
+    The task user wanted to perform was {intent} and I've attached image. Verify if the task is successfully completed or if there is any error or challenge.
+    Return format should be in the given format and strictly in json string format.
+    
+    """ + """
+    {"status" : Only return true or false values,
+     "reason" : Reason or challenge if not completed}
+    """
+
+    response = client.models.generate_content(
+    model=model_name,
+    contents=[base_prompt, image],
+    )
+
+    return response.text
+
+
+
+
+
+    
+
+    
+
+
+
+
+generate_steps("Open chrome and search for alan turing and save his image.")
+
+

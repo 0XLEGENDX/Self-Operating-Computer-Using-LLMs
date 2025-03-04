@@ -1,0 +1,14 @@
+Demo for 04/03/2025
+
+
+we'll prepare a semi working demo.
+
+
+User will give input prompt by voice or text.
+The llm will take a input image of the screenshot and decide what should be next course of action.
+The llm will return a list of steps that needs to be completed to get the task done.
+After each step the system will give the screenshot and the vison llm will verify if the task is successfully executed.
+It will mark it done and start to proceed next task at hand. 
+We'll add a shortcut key as to give screenshot to the llm.
+
+

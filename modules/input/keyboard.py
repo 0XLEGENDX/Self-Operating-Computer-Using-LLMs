@@ -53,5 +53,5 @@ def type_string(string):
 
 if __name__ == "__main__":
     time.sleep(2)
-    key_combination = ["CTRL" , "SHIFT" , "ESC"]
+    key_combination = ["WIN" ]
     press_key_combination(key_combination)
