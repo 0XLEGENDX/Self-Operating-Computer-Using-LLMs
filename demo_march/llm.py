@@ -30,6 +30,7 @@ def generate_steps(user_prompt, image):
     You'll return a list of actions like this where action object is given.
     Output must be strictly in json string format.
     Use this json schema
+    In Intent tab explain the intent very explicitly.
 
     [action,action]
 
@@ -116,10 +117,13 @@ def validate_action_step(action_step, image):
     You're a computer assistant that helps user to verify if certain task is successfully completed on the computer.
     The task user wanted to perform was {intent} and I've attached image. Verify if the task is successfully completed or if there is any error or challenge.
     Return format should be in the given format and strictly in json string format.
+
+    You're a task verifier that will check if the given task is completed or not.
+    The task is {intent}. Check if the given condition is the task is satisfied in the given image.
     
     """ + """
-    {"status" : Only return true or false,
-     "reason" : Reason or challenge if not completed}
+    {"status" : true or false,
+     "reason" : tell if completed or not and if not why}
     """
 
     response = client.models.generate_content(
@@ -127,23 +131,5 @@ def validate_action_step(action_step, image):
     contents=[base_prompt, image],
     )
     
-    return clean_response(response.text)
-
-
-
-
-
-    
-
-    
-
-
-
-query = recognize_speech()
-
-if query: 
-    image_path = "C:/Users/tapas/Self-Operating-Computer-Using-LLMs/screenshots/Screenshot (32).png"
-    steps = generate_steps(query, image_path)
-    print("Generated Steps:", steps)
-else:
-    print("No valid input detected.")
+    return clean_response(response.text) 
+ 

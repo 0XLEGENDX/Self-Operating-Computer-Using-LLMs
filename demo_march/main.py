@@ -4,10 +4,25 @@ import screenshot
 import keyboard
 import json
 import time
+from stt import recognize_speech 
+
+speech_enabled = False
 
 while(True):
-    voice.text_to_speech("Enter your task : .")
-    prompt = input("Enter your task : ")
+
+    if(speech_enabled):
+        print("Listening......")
+        query = recognize_speech()
+        if query: 
+            prompt = query
+        else:
+            print("No valid input detected.")
+            continue
+        
+    else:
+        voice.text_to_speech("Enter your task : .")
+        prompt = input("Enter your task : ")
+
     session_screenshot = screenshot.take_screenshot()
     action_steps = llm.generate_steps(prompt,session_screenshot)
     action_steps = json.loads(action_steps)
@@ -19,6 +34,7 @@ while(True):
         keyboard.wait("Esc")
         session_screenshot = screenshot.fetch_screenshot()
         action_result = json.loads(llm.validate_action_step(task , session_screenshot))
+        print(action_result)
         if(action_result["status"]):
             voice.text_to_speech(action_result["reason"])
         else:
@@ -27,3 +43,8 @@ while(True):
     
     voice.text_to_speech(prompt + " Executed Successfully.")
         # time.sleep(100)
+
+
+
+
+
