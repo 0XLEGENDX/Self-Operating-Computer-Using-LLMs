@@ -30,7 +30,7 @@ while(True):
         print(action)
         task = action["intent"]
         voice.text_to_speech(task)
-        keyboard.add_hotkey("ctrl+shift+a", screenshot.take_screenshot)
+        keyboard.add_hotkey("ctrl", screenshot.take_screenshot)
         keyboard.wait("Esc")
         session_screenshot = screenshot.fetch_screenshot()
         action_result = json.loads(llm.validate_action_step(task , session_screenshot))

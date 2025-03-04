@@ -4,7 +4,7 @@ import os
 from stt import recognize_speech 
 dotenv.load_dotenv()
 
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+client = genai.Client(api_key="AIzaSyBbscjvZixMhAFIiF5IL3HWnKT-ZBE0-2s" )
 model_name = "gemini-1.5-pro"
 
 
@@ -116,6 +116,12 @@ def validate_action_step(action_step, image):
     base_prompt = f"""
     You're a computer assistant that helps user to verify if certain task is successfully completed on the computer.
     The task user wanted to perform was {intent} and I've attached image. Verify if the task is successfully completed or if there is any error or challenge.
+    Strictly verify if all the things in the screenshot are correct or not.
+    For example
+    1) Check if window opened is correct.
+    2) Check if screenshot is truly the end of the task.
+    3) Check if data inputs and outputs are exactly what they should be.
+    
     Return format should be in the given format and strictly in json string format.
 
     You're a task verifier that will check if the given task is completed or not.

@@ -21,6 +21,14 @@
         "actionType": "press_key",
         "key": ["ENTER"],
         "location": [-1, -1]
+    },
+    {
+        "intent": "Type hello world in the document",
+        "inputType": "keyboard",
+        "actionType": "type",
+        "key": [],
+        "string_to_write": "hello world",
+        "location": [-1, -1]
     }
 ]
 ```
