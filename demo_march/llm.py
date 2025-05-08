@@ -4,18 +4,15 @@ import os
 from stt import recognize_speech 
 dotenv.load_dotenv()
 
-client = genai.Client(api_key=  )
+client = genai.Client(api_key="AIzaSyD6MxW8Jz5PQ_64p3LsOhe2_UCvIQvH8JI")
 model_name = "gemini-1.5-pro"
 
 
 def clean_response(response_text):
-
     result = response_text
     result = result.replace("```json","")
     result = result.replace("```","")
-
     return result
-
 
 
 def generate_steps(user_prompt, image):
@@ -137,5 +134,37 @@ def validate_action_step(action_step, image):
     contents=[base_prompt, image],
     )
     
-    return clean_response(response.text) 
+    return clean_response(response.text)
+
+
+def generate_steps_to_execute(user_prompt, image):
+
+    base_prompt = r"""
+    You're a computer assistant that helps user to break down steps for tasks in his computer.
+    The example user query could be search for open calculator app and calculate 10 + 10.
+    The response should be like this in json.
+
+    ["Open Calculator Application" , "Perform 10 + 10 Calculation"]
+
+    Second example
+
+    Open VS Code and create new project. Create a python file write hello world program in it and run.
+
+    The response should be like this in json
+
+    ["Open VS Code", "Create New Project", "Create New Python File" , "Open New File And Write Hello World In Python", "Execute the file]
+
+    
+
+    """
+
+    response = client.models.generate_content(
+    model=model_name,
+    contents=[base_prompt, image],
+    )
+    
+    return clean_response(response.text)
+
+
  
+

@@ -1,0 +1,46 @@
+
+
+1) Input will be given through voice activation and query will be listened 
+
+This script uses the vosk library for speech recognition to listen for a wake word ("hello") and execute a command when detected. It sets up a callback function using sounddevice to capture audio data in real-time. The KaldiRecognizer processes the audio and matches speech to the predefined wake word. Once the word is recognized, it triggers the run_script() function to execute a Python script (your_script.py). The script runs continuously, listening for the wake word until it is detected.
+
+
+2) After the query the LLM will be prompted to do tasks.
+
+To have complete control over GUI the llm needs to have access to all the gui elements and available windows. - completed
+The LLM should also remember past actions and data to make sure it should not be stuck in the future tasks that need past data.
+
+
+To get control over the GUI applications we've got control of all active windows and traversed through all available interactive elements
+in the current active window that we need right now to perform current action.
+
+We'll use memory to remeber past actions and responses to make sure we don't stuck in the future due to past data or not repeat past mistakes.
+
+
+3) Agent components
+
+
+1) LLM Agent + Vision + memory
+
+The LLM Agent will get a prompt which will include a starting point.
+The prompt will contain which window is currently active, background active windows and all the interactive elements in the current window.
+The LLM will return response for the first step to do to execute the task
+
+
+
+__ actions that can be performed are
+
+A) open_active_window(window_name)
+B) keyboard_keys_click([Key,Key])
+C) click_element(element_name)
+D) input_text(element_name , text)
+
+
+The response will be in this json schema
+
+    {"Reason" : "Brief reason why we're performing this action.",
+     "action" : "click_element(element_name)",
+     "memory" : "Explain the whole status in brief, list down all the important things that needs to be knows for possible future use."}
+
+
+Actions will be performed by the controlled by gui_controller module which has functions to get access to all windows and it's elements.

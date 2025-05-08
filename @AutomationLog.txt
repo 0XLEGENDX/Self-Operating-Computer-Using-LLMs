@@ -1,0 +1,3 @@
+2025-05-08 13:53:04.249 highlight_clickables.py[45] click_something -> Find Control Timeout(10s): {Name: ' ', ControlType: ButtonControl}
+2025-05-08 13:53:48.248 highlight_clickables.py[45] click_something -> Find Control Timeout(10s): {Name: ' ', ControlType: EditControl}
+2025-05-08 13:54:57.599 highlight_clickables.py[45] click_something -> Find Control Timeout(10s): {Name: ' ', ControlType: EditControl}

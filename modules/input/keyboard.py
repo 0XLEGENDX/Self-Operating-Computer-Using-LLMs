@@ -1,7 +1,6 @@
 import ctypes
 import time
 
-
 user32 = ctypes.windll.user32
 
 VK_CODES = {

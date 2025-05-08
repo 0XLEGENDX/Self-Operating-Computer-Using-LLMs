@@ -47,8 +47,5 @@ else:
 
 if __name__ == "__main__":
     time.sleep(2) 
-    print("Moving mouse to (500, 500)")
-    move_mouse(500, 500)
-
-    print("Scrolling up")
-    scroll(5)
+    print("Moving mouse to location")
+    move_mouse(1331, 70)

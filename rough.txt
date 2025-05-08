@@ -24,3 +24,11 @@ action = {
 2) Will check if given task is executed successfully. it will return true or false.
 3) If the given is not completed successfully it will plan for next steps to tackle the problem and continue the problem.
 
+
+
+
+How the full execution process will take place:
+
+1) The LLM will be get status of all the things going on in the pc right now that includes
+
+* Active window, all background active windows, 
