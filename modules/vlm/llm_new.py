@@ -4,7 +4,7 @@ import os
 from stt import recognize_speech 
 dotenv.load_dotenv()
 
-client = genai.Client(api_key="AIzaSyD6MxW8Jz5PQ_64p3LsOhe2_UCvIQvH8JI")
+client = genai.Client(api_key="")
 model_name = "gemini-1.5-pro"
 
 
@@ -15,7 +15,7 @@ def clean_response(response_text):
     return result
 
 
-def handle_errors_in_execution(user_prompt,image):
+def handle_errors_in_execution(user_prompt,image, context):
 
     base_prompt = """"""
 
@@ -35,6 +35,8 @@ def generate_normalized_steps(user_prompt,image):
     user prompt : Open control panel and uninstall Brackets
     
     """
+
+
 
 
 
@@ -77,7 +79,7 @@ def generate_steps(user_prompt, memory, gui_status ,image):
     With this query you'll get a starting point which will be a screenshot of the current session in the desktop.
     Also you'll have information on all the current active windows and it's all interactive elements and background active windows.
 
-    """+ gui_status + """
+    """+ gui_status + """   
 
     Your task will be to see what's going on and what steps should you take next to execute this task succesfully without 
     interfaring with other ongoing tasks.

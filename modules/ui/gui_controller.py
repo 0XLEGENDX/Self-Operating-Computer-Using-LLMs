@@ -25,6 +25,7 @@ def click_control(control_name: str):
 
     print(f"No control with name '{control_name}' found in the window.")
 
+
 def set_focus_on_control(control_name: str):
     """
     Sets focus on the control by its name in the specified window.
@@ -178,4 +179,4 @@ def get_all_active_windows():
 # print(get_all_active_windows())
 # click_something("Minimize")
 
-bring_window_to_front("All Control Panel Items")
+# bring_window_to_front("All Control Panel Items")
